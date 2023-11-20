@@ -26,9 +26,9 @@ class CarouselItemsController extends Controller
         // Retrieve the validated input data...
         $validated = $request->validated();
 
-        $CarouselItem = CarouselItems::create($validated);
+        $carouselItem = CarouselItems::create($validated);
 
-        return $CarouselItem;
+        return $carouselItem;
     }
 
     /**
@@ -43,9 +43,16 @@ class CarouselItemsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CarouselItemsRequest $request, string $id)
     {
-        //
+        // Retrieve the validated input data...
+        $validated = $request->validated();
+
+        $carouselItem = CarouselItems::findOrfail($id);
+
+        $carouselItem->update($validated);
+
+        return $carouselItem;
     }
 
     /**
@@ -53,10 +60,10 @@ class CarouselItemsController extends Controller
      */
     public function destroy(string $id)
     {
-        $CarouselItem = CarouselItems::findOrfail($id);
+        $carouselItem = CarouselItems::findOrfail($id);
  
-        $CarouselItem->delete();
+        $carouselItem->delete();
 
-        return $CarouselItem;
+        return $carouselItem;
     }
 }
