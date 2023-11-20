@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,23 +22,25 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(UserRequest $request)
-    // {
-    //     // Retrieve the validated input data...
-    //     $validated = $request->validated();
+    public function store(UserRequest $request)
+    {
+        // Retrieve the validated input data...
+        $validated = $request->validated();
 
-    //     $carouselItem = User::create($validated);
+        $validated["password"] = Hash::make($validated["password"]);
 
-    //     return $carouselItem;
-    // }
+        $user = User::create($validated);
+
+        return $user;
+    }
 
     /**
      * Display the specified resource.
      */
-    // public function show(string $id)
-    // {
-    //     return User::findOrfail($id);
-    // }
+    public function show(string $id)
+    {
+        return User::findOrfail($id);
+    }
     
 
     /**
