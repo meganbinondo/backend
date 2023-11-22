@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CarouselItemsController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
@@ -34,7 +35,13 @@ Route::controller(CarouselItemsController::class)->group(function () {
     Route::delete('/carousel/{id}',         'destroy');
 });
 
-
+Route::controller(MessageController::class)->group(function () {
+    Route::get('/message',                  'index');
+    Route::get('/message/{id}',             'show');
+    Route::post('/message',                 'store');
+    Route::put('/message/{id}',             'update');
+    Route::delete('/message/{id}',          'destroy');
+});
 
 
 // Route::get('/user', [UserController::class, 'index']);
